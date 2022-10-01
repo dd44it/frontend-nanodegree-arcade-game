@@ -10,29 +10,28 @@ const config = {
     // find_center_pos_x: function() { return (this.map_width - this.player_width) / 2 },
     start_position_x: 202,
     start_position_y: 400,
+    min_speed: 100,
+    max_speed: 500,
 };
 
 
 
 // Enemies our player must avoid
 const Enemy = function(x, y, player) {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
-
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
     this.x = x;
     this.y = y;
     this.player = player;
+    this.speed = Math.floor(Math.random() * (config.max_speed - config.min_speed) + config.min_speed);
 };
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
+    this.x += this.speed * dt;
+    if (this.x > config.map_width) {
+        this.x = 0;
+    }
 };
 
 // Draw the enemy on the screen, required method for game
@@ -61,8 +60,6 @@ Player.prototype.render = function () {
 };
 
 const player = new Player(config.start_position_x, config.start_position_y);
-// config.start_position_x()
-console.log(config.start_position_x)
 
 const enemy1 = new Enemy(30, 120, 60, 'images/enemy-bug.png', player);
 const enemy2 = new Enemy(15, 220, 30, 'images/enemy-bug.png', player);
