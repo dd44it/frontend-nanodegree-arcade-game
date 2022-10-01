@@ -32,17 +32,22 @@ Enemy.prototype.update = function(dt) {
     if (this.x > config.map_width) {
         this.x = 0;
     }
+    if(this.checkCollision()){
+        // resteart position
+    }
 };
 
-// Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
-
+Enemy.prototype.checkCollision = function(){
+    // console.log(this.x, this.player.x, config.player_width)
+    return (  this.player.x < this.x + config.player_width && 
+              this.player.x + config.player_width > this.x &&
+              this.player.y < this.y && 
+              config.player_heigth + this.player.y > this.y )
+}
 
 const Player = function(x, y, ){
     this.x = x;
@@ -61,9 +66,9 @@ Player.prototype.render = function () {
 
 const player = new Player(config.start_position_x, config.start_position_y);
 
-const enemy1 = new Enemy(30, 120, 60, 'images/enemy-bug.png', player);
-const enemy2 = new Enemy(15, 220, 30, 'images/enemy-bug.png', player);
-const enemy3 = new Enemy(0, 50, 20, 'images/enemy-bug.png', player);
+const enemy1 = new Enemy(30, 120, player, );
+const enemy2 = new Enemy(15, 220, player, );
+const enemy3 = new Enemy(0, 50, player, );
 const allEnemies = [enemy1, enemy2, enemy3];
 
 function checkCollisionsWalls(player){
