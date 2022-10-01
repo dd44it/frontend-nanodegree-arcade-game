@@ -7,7 +7,12 @@ const config = {
     map_heigth: 606,
     extreme_point_left: -4,
     extreme_point_top: -15,
-}
+    // find_center_pos_x: function() { return (this.map_width - this.player_width) / 2 },
+    start_position_x: 202,
+    start_position_y: 400,
+};
+
+
 
 // Enemies our player must avoid
 const Enemy = function(x, y, player) {
@@ -44,18 +49,20 @@ const Player = function(x, y, ){
     this.x = x;
     this.y = y;
     this.sprite = 'images/char-boy.png';
-}
+};
 
 Player.prototype.update = function () {
 
 
-}
+};
 
 Player.prototype.render = function () {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+};
 
-const player = new Player(400, 400);
+const player = new Player(config.start_position_x, config.start_position_y);
+// config.start_position_x()
+console.log(config.start_position_x)
 
 const enemy1 = new Enemy(30, 120, 60, 'images/enemy-bug.png', player);
 const enemy2 = new Enemy(15, 220, 30, 'images/enemy-bug.png', player);
@@ -63,7 +70,7 @@ const enemy3 = new Enemy(0, 50, 20, 'images/enemy-bug.png', player);
 const allEnemies = [enemy1, enemy2, enemy3];
 
 function checkCollisions(player){
-    if(player.x + config.player_width >= config.map_width){
+    if(player.x + config.player_width > config.map_width){
         player.x -= config.player_move_width;
     }
     else if(player.x < config.extreme_point_left){
@@ -75,7 +82,7 @@ function checkCollisions(player){
     else if(player.y < config.extreme_point_top){
         player.y += config.player_move_heigth;
     }
-}
+};
 
 Player.prototype.handleInput = function(key) {
     this.update()
@@ -96,7 +103,7 @@ Player.prototype.handleInput = function(key) {
             this.y += config.player_move_heigth;
             checkCollisions(this)
             break;
-    };
+    }
 };
 
 // This listens for key presses and sends the keys to your
