@@ -66,7 +66,7 @@ const enemy2 = new Enemy(15, 220, 30, 'images/enemy-bug.png', player);
 const enemy3 = new Enemy(0, 50, 20, 'images/enemy-bug.png', player);
 const allEnemies = [enemy1, enemy2, enemy3];
 
-function checkCollisions(player){
+function checkCollisionsWalls(player){
     if(player.x + config.player_width > config.map_width){
         player.x -= config.player_move_width;
     }
@@ -86,19 +86,19 @@ Player.prototype.handleInput = function(key) {
     switch(key){
         case 'left':
             this.x -= config.player_move_width;
-            checkCollisions(this)
+            checkCollisionsWalls(this)
             break;
         case 'right':
             this.x += config.player_move_width;
-            checkCollisions(this)
+            checkCollisionsWalls(this)
             break;
         case 'up':
             this.y -= config.player_move_heigth;
-            checkCollisions(this)
+            checkCollisionsWalls(this)
             break;
         case 'down':
             this.y += config.player_move_heigth;
-            checkCollisions(this)
+            checkCollisionsWalls(this)
             break;
     }
 };
