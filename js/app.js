@@ -33,7 +33,7 @@ Enemy.prototype.update = function(dt) {
         this.x = 0;
     }
     if(this.checkCollision()){
-        // resteart position
+        this.player.resetInitialPosition()
     }
 };
 
@@ -42,11 +42,11 @@ Enemy.prototype.render = function() {
 };
 
 Enemy.prototype.checkCollision = function(){
-    // console.log(this.x, this.player.x, config.player_width)
-    return (  this.player.x < this.x + config.player_width && 
-              this.player.x + config.player_width > this.x &&
-              this.player.y < this.y && 
-              config.player_heigth + this.player.y > this.y )
+    return (    this.player.x  < this.x + config.player_width && 
+                this.player.x + config.player_width > this.x && 
+                this.player.y < this.y + config.player_move_heigth && 
+                this.player.y > this.y
+            )
 }
 
 const Player = function(x, y, ){
@@ -60,14 +60,19 @@ Player.prototype.update = function () {
 
 };
 
+Player.prototype.resetInitialPosition = function(){
+    this.x = config.start_position_x;
+    this.y = config.start_position_y;
+};
+
 Player.prototype.render = function () {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
 const player = new Player(config.start_position_x, config.start_position_y);
 
-const enemy1 = new Enemy(30, 120, player, );
-const enemy2 = new Enemy(15, 220, player, );
+const enemy1 = new Enemy(202, 145, player, );
+const enemy2 = new Enemy(0, 220, player, );
 const enemy3 = new Enemy(0, 50, player, );
 const allEnemies = [enemy1, enemy2, enemy3];
 
