@@ -3,6 +3,10 @@ const config = {
     player_heigth: 171,
     player_move_width: 101,
     player_move_heigth: 83,
+    map_width: 505,
+    map_heigth: 606,
+    extreme_point_left: -4,
+    extreme_point_top: -15,
 }
 
 // Enemies our player must avoid
@@ -44,15 +48,12 @@ const Player = function(x, y, ){
 
 Player.prototype.update = function () {
 
+
 }
 
 Player.prototype.render = function () {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
-
-Player.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
 
 const player = new Player(400, 400);
 
@@ -61,20 +62,39 @@ const enemy2 = new Enemy(15, 220, 30, 'images/enemy-bug.png', player);
 const enemy3 = new Enemy(0, 50, 20, 'images/enemy-bug.png', player);
 const allEnemies = [enemy1, enemy2, enemy3];
 
+function checkCollisions(player){
+    if(player.x + config.player_width >= config.map_width){
+        player.x -= config.player_move_width;
+    }
+    else if(player.x < config.extreme_point_left){
+        player.x += config.player_move_width;
+    }
+    else if(player.y + config.player_heigth >= config.map_heigth){
+        player.y -= config.player_move_heigth;
+    }
+    else if(player.y < config.extreme_point_top){
+        player.y += config.player_move_heigth;
+    }
+}
 
 Player.prototype.handleInput = function(key) {
+    this.update()
     switch(key){
         case 'left':
             this.x -= config.player_move_width;
+            checkCollisions(this)
             break;
         case 'right':
             this.x += config.player_move_width;
+            checkCollisions(this)
             break;
         case 'up':
             this.y -= config.player_move_heigth;
+            checkCollisions(this)
             break;
         case 'down':
             this.y += config.player_move_heigth;
+            checkCollisions(this)
             break;
     };
 };
