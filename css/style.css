@@ -1,11 +1,14 @@
 body {
     text-align: center;
     font-family:'Gill Sans', sans-serif;
-    font-size: 18px;
+    font-size: 16px;
 }
 .info {
     display: flex;
     justify-content: space-between;
     max-width: 505px;
     margin: 0 auto;
+}
+.info .score_wrapper {
+    font-size: 1.2em;
 }
