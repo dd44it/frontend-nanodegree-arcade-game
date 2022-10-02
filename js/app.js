@@ -107,7 +107,7 @@ function checkCollisionsWalls(player){
     }
     else if(player.y < config.extreme_point_top){
         player.y += config.player_move_heigth;
-        return
+        return;
     }
     if(player.y === config.extreme_point_top){
         setTimeout(() => {
@@ -121,8 +121,7 @@ function checkCollisionsWalls(player){
                 player.score++;
                 player.updateScore(player.score);
             }
-            
-         }, 500);
+         }, 100);
          return
     }
 };
