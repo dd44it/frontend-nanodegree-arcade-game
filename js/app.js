@@ -89,6 +89,9 @@ function checkCollisionsWalls(player){
     else if(player.y < config.extreme_point_top){
         player.y += config.player_move_heigth;
     }
+    if(player.y === config.extreme_point_top){
+        setTimeout(() => { player.resetInitialPosition(); }, 500);
+    }
 };
 
 Player.prototype.handleInput = function(key) {
