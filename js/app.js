@@ -82,9 +82,8 @@ Player.prototype.showInfoGame = function () {
 };
 
 Player.prototype.updateScore = function (currentScore) {
-    const scoreElem = document.querySelector('.score_wrapper span')
-    scoreElem.textContent = currentScore
-    console.log('updateScore')
+    const scoreElem = document.querySelector('.score_wrapper span');
+    scoreElem.textContent = currentScore;
 }
 
 const player = new Player(config.start_position_x, config.start_position_y);
