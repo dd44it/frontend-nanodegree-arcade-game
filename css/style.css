@@ -1,3 +1,11 @@
 body {
     text-align: center;
+    font-family:'Gill Sans', sans-serif;
+    font-size: 18px;
+}
+.info {
+    display: flex;
+    justify-content: space-between;
+    max-width: 505px;
+    margin: 0 auto;
 }
