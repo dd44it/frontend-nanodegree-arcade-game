@@ -42,8 +42,8 @@ Enemy.prototype.render = function() {
 };
 
 Enemy.prototype.checkCollision = function(){
-    return (    this.player.x  < this.x + config.player_width && 
-                this.player.x + config.player_width > this.x && 
+    return (    this.player.x < this.x + config.player_width / 2  && 
+                this.player.x + config.player_width / 2 > this.x && 
                 this.player.y < this.y + config.player_move_heigth && 
                 this.player.y > this.y
             )
