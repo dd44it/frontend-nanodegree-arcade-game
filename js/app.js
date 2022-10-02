@@ -111,13 +111,13 @@ function checkCollisionsWalls(player){
     if(player.y === config.extreme_point_top){
         setTimeout(() => {
             player.resetInitialPosition();
+             if(config.win_scrore > player.score){
+                player.score++;
+                player.updateScore(player.score);
+            }
             if(player.score === config.win_scrore){
                 alert('Congratulations, you won. Your score will be reset. You can play again, if you want)')
                 player.score = config.start_score;
-                player.updateScore(player.score);
-            }
-            else {
-                player.score++;
                 player.updateScore(player.score);
             }
          }, 100);
