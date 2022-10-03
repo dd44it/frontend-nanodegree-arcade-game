@@ -14,6 +14,7 @@ const config = {
     rule_text: 'Your player should reach the water by avoiding bugs.',
     start_score: 0,
     win_scrore: 5,
+    list_y_enemyies_coord: [60, 143, 226]
 };
 
 const body = document.querySelector('body');
@@ -86,13 +87,16 @@ Player.prototype.updateScore = function (currentScore) {
     scoreElem.textContent = currentScore;
 }
 
-const player = new Player(config.start_position_x, config.start_position_y);
+function createEnemies(player){
+    return config.list_y_enemyies_coord.map(rowNumber => {
+        return new Enemy( config.extreme_point_left - config.player_width, rowNumber, player)
+    });
+};
+
+const player = new Player(config.start_position_x , config.start_position_y);
 player.showInfoGame();
 
-const enemy1 = new Enemy(202, 145, player, );
-const enemy2 = new Enemy(0, 220, player, );
-const enemy3 = new Enemy(0, 50, player, );
-const allEnemies = [enemy1, enemy2, enemy3];
+const allEnemies = createEnemies(player);
 
 function checkCollisionsWalls(player){
     if(player.x + config.player_width > config.map_width){
@@ -120,7 +124,7 @@ function checkCollisionsWalls(player){
                 player.score = config.start_score;
                 player.updateScore(player.score);
             }
-         }, 100);
+        }, 100);
          return
     }
 };
